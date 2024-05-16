@@ -190,7 +190,9 @@ export type ICalendar = {
   }
 }
 
-
+export type Erro = {
+  error:string
+};
 
 
 export type User = {

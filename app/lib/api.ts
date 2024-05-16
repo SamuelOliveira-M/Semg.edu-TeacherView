@@ -7,20 +7,22 @@ import {
   SubjectOfTeacher,
   TeacherClasses,
   IDataStatistics,
-  ICalendar
+  ICalendar,
+  User,
+  Erro
 } from './definitions';
 
-export async function login(email:string) {
-
+export async function login(email:string,senha:string) {
+  console.log(senha)
   const res = await fetch(`${process.env.API_URL}/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({email}),
+    body: JSON.stringify({email,senha}),
   });
 
-  const data = await res.json();
+  const data:User|Erro = await res.json();
 
   return data;
 }
