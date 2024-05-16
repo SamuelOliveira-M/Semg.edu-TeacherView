@@ -49,7 +49,7 @@ export async function signIn(formData: FormData) {
   const session = await encrypt({ user, expires });
 
   cookies().set("session", session, { expires, httpOnly: true });
-  redirect(`/dashboard/${user.id}`)
+  redirect(`/dashboard`)
 }
 
 export async function logout() {

@@ -1,4 +1,3 @@
-import { UpdateClass, DeleteClass } from '@/app/ui/class/buttons';
 import InvoiceStatus from '@/app/ui/teacher/status';
 import { formatDateToLocal } from '@/app/lib/utils';
 import {fetchFilteredClass} from '@/app/lib/api'
@@ -34,10 +33,6 @@ export default async function CardClass() {
               <div className="flex w-full items-center justify-between pt-4">
                 <div>
                   <p>{formatDateToLocal(schoolClass.ano_letivo.data_inicio)}</p>
-                </div>
-                <div className="flex justify-end gap-2">
-                  <UpdateClass id={schoolClass.id} />
-                  <DeleteClass id={schoolClass.id} />
                 </div>
               </div>
             </div>

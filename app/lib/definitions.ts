@@ -194,7 +194,6 @@ export type Erro = {
   error:string
 };
 
-
 export type User = {
   id:string
 	nome: string,
@@ -203,6 +202,18 @@ export type User = {
 	accessToken : string
 	idRefreshToken: string,
 };
+
+export type Session = {
+  user:User,
+  expires:Date
+}
+
+
+
+
+
+
+
 
 export type Customer = {
   id: string;

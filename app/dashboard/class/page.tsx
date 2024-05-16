@@ -12,7 +12,6 @@ export default async function PlaygroundPage() {
       <div className="w-full">
         <div className="mt-4 flex items-center justify-between gap-2 md:mt-8 mb-4">
           <Search placeholder="Search invoices..." />
-          <CreateInvoice />
         </div>
         <div>
           <Suspense fallback={<InvoicesTableSkeleton />}>

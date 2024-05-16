@@ -2,13 +2,13 @@ import {AcmeLogoLarge} from '@/app/ui/acme-logo';
 import LoginForm from '@/app/ui/login-form';
 import { redirect } from "next/navigation";
 import { getSession } from '@/app/lib/actions';
+import { Session } from '../lib/definitions';
 
 export default async  function LoginPage() {
-  const session = await getSession();
+  const session:Session = await getSession();
   
   if(session){
-    const id = session.id
-    redirect(`/dashboard/${id}`);
+    redirect(`/dashboard`);
   }
   
   return (
