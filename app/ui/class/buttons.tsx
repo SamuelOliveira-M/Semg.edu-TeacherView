@@ -1,18 +1,18 @@
-// import { PencilIcon, PlusIcon, TrashIcon,EyeIcon } from '@heroicons/react/24/outline';
-// import Link from 'next/link';
+import { ClipboardDocumentListIcon,PencilIcon, PlusIcon, TrashIcon,EyeIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 // import { deleteInvoice } from '@/app/lib/actions';
 
 
-// export function UpdateClass({ id }: { id: string }) {
-//   return (
-//     <Link
-//       href={`/dashboard/teacher/${id}/edit`}
-//       className="rounded-md border p-2 hover:bg-gray-50"
-//     >
-//       <PencilIcon className="w-5" />
-//     </Link>
-//   );
-// }
+export function UpdateClass({ id }: { id: string }) {
+  return (
+    <Link
+      href={`/dashboard/teacher/${id}/edit`}
+      className="rounded-md border p-2 hover:bg-gray-50"
+    >
+      <PencilIcon className="w-5" />
+    </Link>
+  );
+}
 
 // export function DeleteClass({ id }: { id: string }) {
 //   const deleteInvoiceWithId = deleteInvoice.bind(null, id);
@@ -26,20 +26,20 @@
 //   );
 // }
 
-// export function UpdateMatricula(
-//   { turmaId,
-//     matriculaId
-//   }: { matriculaId: string, turmaId:string}) {
+export function UpdateMatricula(
+  { turmaId,
+    matriculaId
+  }: { matriculaId: string, turmaId:string}) {
   
-//     return (
-//     <Link
-//       href={`/dashboard/class/${matriculaId}/registration/${turmaId}`}
-//       className="rounded-md border p-2 hover:bg-gray-50"
-//     >
-//       <PencilIcon className="w-5" />
-//     </Link>
-//   );
-// }
+    return (
+    <Link
+      href={`/dashboard/class/${matriculaId}/registration/${turmaId}`}
+      className="rounded-md border p-2 hover:bg-gray-50"
+    >
+      <PencilIcon className="w-5" />
+    </Link>
+  );
+}
 
 // export function DeleteMatricula(
 //   { turmaId,
@@ -58,5 +58,20 @@
 //   );
 // }
 
-
+export function Redimento(
+  { 
+		disciplinaId,
+		turmaId
+  }: { disciplinaId: string, turmaId:string}) {
+  
+    return (
+    <Link
+      href={`/dashboard/class/${turmaId}/subject/${disciplinaId}`}
+      className="rounded-md border p-2 hover:bg-gray-50"
+      title='Ficha de Redimento'
+    >
+      <ClipboardDocumentListIcon className="w-5" />
+    </Link>
+  );
+}
 

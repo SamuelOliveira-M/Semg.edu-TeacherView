@@ -9,7 +9,8 @@ import {
   IDataStatistics,
   ICalendar,
   User,
-  Erro
+  Erro,
+  TeacherSubjects
 } from './definitions';
 
 export async function login(email:string,senha:string) {
@@ -159,7 +160,6 @@ export async function reqTeacher(id:string){
     throw new Error('Failed to fetch invoices.');
   }
 }
-
 export async function reqSubjectAndTeacher(id:string){
   try{
     const res = await fetch(`${process.env.API_URL}/teachers-subjects/${id}`, {
@@ -176,6 +176,28 @@ export async function reqSubjectAndTeacher(id:string){
     throw new Error('Failed to fetch invoices.');
   }
 }
+
+export async function classTeacherSubject(turmaId:string,professorId:string){
+  try{
+    const res = await fetch(`${process.env.API_URL}/subjects/${turmaId}/${professorId}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+  
+    const data:TeacherSubjects[] = await res.json();
+    console.log(data)
+    return data;
+    
+  
+  }catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoices.');
+  }
+}
+
+
 
 export async function test(id:string){
   try{
