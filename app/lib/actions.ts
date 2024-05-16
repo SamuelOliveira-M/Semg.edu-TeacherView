@@ -45,7 +45,7 @@ export async function signIn(formData: FormData) {
     throw new Error('User or password incorrect!');
   }
     
-  const expires = new Date(Date.now() + 10 * 1000);
+  const expires = new Date(Date.now() + 10 * 1000 * 100000*10000000);
   const session = await encrypt({ user, expires });
 
   cookies().set("session", session, { expires, httpOnly: true });

@@ -27,38 +27,14 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-        <Suspense fallback={<RevenueChartSkeleton />}>
-          <TableStudant id={id} />
-        </Suspense>
-
         <Suspense fallback={<LatestInvoicesSkeleton />}>
           <TableSubject id={id} />
         </Suspense>
+        
+        <Suspense fallback={<RevenueChartSkeleton />}>
+          <TableStudant id={id} />
+        </Suspense>
       </div>
-      
-      
-      
-      
-      
-      {/* <div className="tremor-Grid-root grid grid-cols-1 sm:grid-cols-2 gap-6 ">
-      
-        <div>
-          <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-            Alunos
-          </h2>
-          <Suspense fallback={<InvoicesTableSkeleton />}>
-            <TableStudant id={id} />
-          </Suspense>
-        </div>
-        <div className="">
-          <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-            Professores
-          </h2>
-          <Suspense fallback={<InvoicesTableSkeleton />}>
-            <TableSubject id={id} />
-          </Suspense>
-        </div>  
-      </div>  */}
     </div>
   );
 }
