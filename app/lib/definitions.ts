@@ -208,7 +208,13 @@ export type Session = {
   expires:Date
 }
 
-
+export type TeacherSubjects = {
+  disciplina:{
+    id: string,
+		nome: string,
+		carga_horaria:Number
+  }
+}
 
 
 
