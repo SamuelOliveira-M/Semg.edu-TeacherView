@@ -10,7 +10,8 @@ import {
   ICalendar,
   User,
   Erro,
-  TeacherSubjects
+  TeacherSubjects,
+  PerformanceSheet
 } from './definitions';
 
 export async function login(email:string,senha:string) {
@@ -82,6 +83,24 @@ export async function fetchRegistrationById(id:string){
     throw new Error('Failed to fetch invoices.');
   }
 }
+
+export async function studentPerformanceSheet(turmaId:string, disciplinaId:string, professorId:string){
+  try{
+    const res = await fetch(`${process.env.API_URL}/redimentoss/${turmaId}/${disciplinaId}/${professorId}`, {
+      method: 'GET',
+    });
+  
+    const data:PerformanceSheet[]= await res.json();
+    return data;
+  
+  }catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoices.');
+  }
+}
+
+
+
 
 export async function uniqueFetchRegistrationById(id:string){
   try{

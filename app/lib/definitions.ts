@@ -216,6 +216,27 @@ export type TeacherSubjects = {
   }
 }
 
+export type PerformanceSheet = {
+  turma: {
+    matriculas: [
+      {
+        aluno: {
+          id: string,
+          nome: string
+        },
+        avaliacao: [
+          {
+            id: string,
+            nota: number,
+            semestre: number,
+            mes: number
+          }
+        ]
+      }
+    ]
+  } 
+};
+
 
 
 

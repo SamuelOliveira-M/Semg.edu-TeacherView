@@ -1,18 +1,20 @@
-import { CheckPassingGrade,StudantStatus } from "./status";
+import { CheckPassingGrade,StudantStatus } from "../studant/status";
 import { formatText } from "@/app/lib/utils";
 
 import React from "react";
-import { studantProfileNotes } from "@/app/lib/api";
+import { studentPerformanceSheet } from "@/app/lib/api";
 
-export default async function LinhaGrade({ id,  }: {id:string}) {
-  
-  const dataGrade =  await studantProfileNotes(id)
-  
-  const headers = [
-    'Matéria', 'MAR', 'ABR', 'MAI', 'JUN', '1ºRS', 'AGO', 'SET', 'OUT', 'NOV', '2ºRS', 'PF', 'MF', 'Resultado'
-  ];
+export default async function IncomeSheet({ turmaId,disciplinaId,professorId }: {turmaId:string, disciplinaId:string, professorId:string,}) {
+    
+    const dataGrade =  await studentPerformanceSheet(turmaId, disciplinaId, professorId)
+
+    const headers = [
+      'Alunos', 'MAR', 'ABR', 'MAI', 'JUN', '1ºRS', 'AGO', 'SET', 'OUT', 'NOV', '2ºRS', 'PF', 'MF', 'Resultado'
+    ];
 
   return (
+
+    
     <div className="overflow-x-auto">
       <table className=" min-w-full text-gray-900 bg-blue-300 rounded-t-md">
         <thead className="text-center text-sm font-normal">
@@ -24,7 +26,7 @@ export default async function LinhaGrade({ id,  }: {id:string}) {
             ))}
           </tr>
         </thead>
-
+        
         <tbody className="bg-white text-center">
           {dataGrade.map((disciplina) => (
             <tr key={3} className="w-full border-b py-3 text-sm last-of-type:border-none">
@@ -73,6 +75,7 @@ export default async function LinhaGrade({ id,  }: {id:string}) {
             </tr>
           ))}
         </tbody>
+
       </table>
     </div>
   );
