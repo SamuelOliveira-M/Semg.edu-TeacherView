@@ -11,7 +11,8 @@ import {
   User,
   Erro,
   TeacherSubjects,
-  PerformanceSheet
+  PerformanceSheet,
+  StudantPerformanceSheet
 } from './definitions';
 
 export async function login(email:string,senha:string) {
@@ -86,11 +87,11 @@ export async function fetchRegistrationById(id:string){
 
 export async function studentPerformanceSheet(turmaId:string, disciplinaId:string, professorId:string){
   try{
-    const res = await fetch(`${process.env.API_URL}/redimentoss/${turmaId}/${disciplinaId}/${professorId}`, {
+    const res = await fetch(`${process.env.API_URL}/redimentoss/${turmaId}/${disciplinaId}`, {
       method: 'GET',
     });
   
-    const data:PerformanceSheet[]= await res.json();
+    const data:PerformanceSheet= await res.json();
     return data;
   
   }catch (error) {
@@ -136,11 +137,11 @@ export async function studantProfile(id:string){
 
 export async function studantProfileNotes(id:string){
   try{
-    const res = await fetch(`${process.env.API_URL}/avaliacao/${id}`, {
+    const res = await fetch(`${process.env.API_URL}/avaliacaos/${id}`, {
       method: 'GET',
     });
   
-    const data:SubjectOfGrade[] = await res.json();
+    const data:StudantPerformanceSheet = await res.json();
     return data;
   
   }catch (error) {

@@ -217,24 +217,45 @@ export type TeacherSubjects = {
 }
 
 export type PerformanceSheet = {
-  turma: {
-    matriculas: [
-      {
-        aluno: {
-          id: string,
-          nome: string
-        },
-        avaliacao: [
-          {
-            id: string,
-            nota: number,
-            semestre: number,
-            mes: number
-          }
-        ]
-      }
-    ]
-  } 
+  matriculas: [
+    {
+      aluno: {
+        id: string,
+        nome: string
+      },
+      avaliacao: [
+        {
+          id: string | null,
+          nota: number,
+          mes: number,
+          semestre: string | null,
+          tipo: string | null
+        }
+      ],
+      media: number,
+      status:string
+    }
+  ]
+};
+
+export type StudantPerformanceSheet = {
+  redimento: [
+		{
+			id: string,
+			nome: string,
+      avaliacao: [
+        {
+          id: string | null,
+          nota: number,
+          mes: number,
+          semestre: string | null,
+          tipo: string | null
+        }
+      ],
+      media: number,
+      status:string
+    }
+  ]
 };
 
 
