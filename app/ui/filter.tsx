@@ -1,6 +1,6 @@
 'use client'
 
-import React, { use } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useDebouncedCallback } from 'use-debounce';
@@ -11,10 +11,19 @@ interface FilterProps {
 }
 
 const Filter: React.FC<FilterProps> = ({ subjects }) => {
-  console.log(subjects)
+  console.log(subjects);
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { replace } = useRouter();
+  const { replace, push } = useRouter();
+  const [selectedDisciplina, setSelectedDisciplina] = useState<string | null>(null);
+
+  useEffect(() => {
+    const urlParts = pathname.split('/');
+    const disciplinaIndex = urlParts.indexOf('subject');
+    if (disciplinaIndex !== -1 && urlParts.length > disciplinaIndex + 1) {
+      setSelectedDisciplina(urlParts[disciplinaIndex + 1]);
+    }
+  }, [pathname]);
 
   const handleSearch = useDebouncedCallback((term: string) => {
     const params = new URLSearchParams(searchParams);
@@ -28,14 +37,18 @@ const Filter: React.FC<FilterProps> = ({ subjects }) => {
     replace(`${pathname}?${params.toString()}`);
   }, 300);
 
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedSubjectId = event.target.value;
+
+    push(`/dashboard/class/1d40e9da-5e84-4c29-8cfa-21563f284b1b/subject/${selectedSubjectId}`);
+  };
+
   return (
     <div className="relative flex flex-1 flex-shrink-0 mb-1">
       <select
         className="peer block rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
-        onChange={(e) => {
-          handleSearch(e.target.value);
-        }}
-        defaultValue={searchParams.get('query')?.toString() || ''}
+        onChange={handleSelectChange}
+        value={selectedDisciplina || ''}
       >
         {subjects.map((subject, index) => (
           <option key={index} value={subject.disciplina.id}>
