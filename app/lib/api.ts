@@ -225,7 +225,7 @@ export async function test(id:string){
       method: 'GET',
     });
   
-    const data:TeacherClasses= await res.json();
+    const data:TeacherClasses[]= await res.json();
     return data;
   
   }catch (error) {

@@ -154,10 +154,7 @@ export type SubjectOfTeacher = {
 }
 
 export type TeacherClasses = {
-  professor:Teacher,
-  disciplinasTurmas:[{
-    turma: SchollClass
-  }]
+  turma: SchollClass
 }
 
 export type IDataStatistics = {

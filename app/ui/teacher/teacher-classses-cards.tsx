@@ -12,7 +12,7 @@ export default async function SchoolClassCard({id}:{id:string}) {
   return (
     <div className="rounded-lg bg-gray-50 p-4 md:pt-0">
       <Grid numItemsSm={2} numItemsLg={30} className="gap-6">
-        {teacherClasses.disciplinasTurmas.map((schoolClass) => (
+        {teacherClasses.map((schoolClass) => (
           <Link 
             key={schoolClass.turma.id}
             href={`/dashboard/class/${schoolClass.turma.id}`}

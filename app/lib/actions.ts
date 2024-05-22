@@ -14,7 +14,7 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("100000 sec from now")
+    .setExpirationTime("10 min from now")
     .sign(key);
 }
 
