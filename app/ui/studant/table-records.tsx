@@ -12,7 +12,6 @@ export default async function LinhaGrade({ id,  }: {id:string}) {
     'Matéria', 'MAR', 'ABR', 'MAI', 'JUN', '1ºRS', 'AGO', 'SET', 'OUT', 'NOV', '2ºRS', 'PF', 'MF', 'Resultado'
   ];
 
-  console.log(dataGrade)
   return (
     <div className="overflow-x-auto">
       <table className=" min-w-full text-gray-900 bg-blue-300 rounded-t-md">

@@ -18,7 +18,7 @@ export default async function TableSubject({
     redirect("/login");
   }
 
-  const subjects = await classTeacherSubject(id,"2126e1bc-77c9-4df1-8d5e-915598c9146d");//session.user.id
+  const subjects = await classTeacherSubject(id,session.user.id);
   
   return (
     <div className="flex w-full flex-col md:col-span-4">

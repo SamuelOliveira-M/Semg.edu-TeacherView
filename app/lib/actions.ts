@@ -14,7 +14,7 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 sec from now")
+    .setExpirationTime("100000 sec from now")
     .sign(key);
 }
 
@@ -45,7 +45,7 @@ export async function signIn(formData: FormData) {
     throw new Error('User or password incorrect!');
   }
     
-  const expires = new Date(Date.now() + 10 * 1000 * 100000*10000000);
+  const expires = new Date(Date.now() + 1000000 * 10000000 * 100000*10000000);
   const session = await encrypt({ user, expires });
 
   cookies().set("session", session, { expires, httpOnly: true });
