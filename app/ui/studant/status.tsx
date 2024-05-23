@@ -1,5 +1,11 @@
+import React from 'react';
 import clsx from 'clsx';
-import { string } from 'prop-types';
+
+interface CheckPassingGradeProps {
+  nota: number;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name: string;
+}
 
 export function StudantStatus( Resultado:string ) {
   return (
@@ -31,7 +37,44 @@ export function StudantStatus( Resultado:string ) {
   );
 }
 
-export function CheckPassingGrade(nota: number ) {
+export const CheckPassingGrade: React.FC<CheckPassingGradeProps> = ({ nota, handleChange, name }) => {
+  const checkGrade = (): "Reprovado" | "Aprovado" | "Vazio" => {
+    if (nota === 0) {
+      return 'Vazio';
+    }
+    if (nota >= 6) {
+      return 'Aprovado';
+    }
+    return 'Reprovado';
+  };
+
+  const status = checkGrade();
+
+  return (
+    <input
+      type="number"
+      name={name}
+      value={nota === 0 ? '' : nota.toString()}
+      onChange={handleChange}
+      min={0.1}
+      max={10}
+      step={0.1}
+      maxLength={2}
+      className={clsx(
+        'inline-flex items-center text-xs w-full p-1 text-center',
+        
+        {
+          'border-none': true,
+          'text-green-500': status === 'Aprovado',
+          'text-red-500': status === 'Reprovado',
+          'text-gray-500': status === 'Vazio',
+        }
+      )}
+    />
+  );
+};
+
+export function checkPassingGradeMedia(nota: number ) {
 
 	const checkGrade: () => "Reprovado" | "Aprovado" | "Vazio" = () => {
     

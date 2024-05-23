@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 import BannerClass from '@/app/ui/class/banner-class';
 import { lusitana } from '@/app/ui/fonts';
 import Filter from '@/app/ui/filter';
-import { classTeacherSubject } from '@/app/lib/api';
+import { classTeacherSubject ,studentPerformanceSheet} from '@/app/lib/api';
 
 export default async function Page(
   { params }: { params: {
@@ -27,6 +27,8 @@ export default async function Page(
   const teacherId = session.user.id
 
   const subjects = await classTeacherSubject(classId,session.user.id);
+
+  const dataGrade =  await studentPerformanceSheet(classId, subjectId, teacherId)
   
   return (
     <div>	
@@ -36,8 +38,8 @@ export default async function Page(
         Ficha de Redimento
       </h1>
       <Filter subjects = {subjects}/>
-    
-      <IncomeSheet turmaId={classId} disciplinaId={subjectId} professorId={teacherId}/>        
+      <IncomeSheet dataGrade = {dataGrade}/>
+              
     </div>
   );
 } 
