@@ -14,7 +14,7 @@ export async function encrypt(payload: any) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
-    .setExpirationTime("10 min from now")
+    .setExpirationTime("7 days from now") // Changed to 1 week from now
     .sign(key);
 }
 
@@ -26,26 +26,25 @@ export async function decrypt(input: string): Promise<any> {
 }
 
 export async function signIn(formData: FormData) {
- 
+
   const formDataObject = Object.fromEntries(formData);
-  
+
   const parsedCredentials = z
     .object({ email: z.string().email(), password: z.string().min(6) })
     .safeParse(formDataObject);
-  
+
   if (!parsedCredentials.success) {
     throw new Error('Invalid form data');
   }
 
   const { email, password } = parsedCredentials.data;
-  const user = await login(email,password);
-  
+  const user = await login(email, password);
 
   if (typeof user === 'object' && 'error' in user) {
     throw new Error('User or password incorrect!');
   }
-    
-  const expires = new Date(Date.now() + 1000000 * 10000000 * 100000*10000000);
+
+  const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // One week in milliseconds
   const session = await encrypt({ user, expires });
 
   cookies().set("session", session, { expires, httpOnly: true });
@@ -69,7 +68,9 @@ export async function updateSession(request: NextRequest) {
 
   // Refresh the session so it doesn't expire
   const parsed = await decrypt(session);
-  parsed.expires = new Date(Date.now() + 10 * 1000);
+  parsed.expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); 
+  // No need to change the expiration time here, as it is already set for one week during sign-in
+
   const res = NextResponse.next();
   res.cookies.set({
     name: "session",
