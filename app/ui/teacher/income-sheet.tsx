@@ -1,37 +1,43 @@
 'use client'
 
 import React, { useState } from 'react';
-import { CheckPassingGrade,StudantStatus ,checkPassingGradeMedia} from '../studant/status';
+import { CheckPassingGrade, StudantStatus, checkPassingGradeMedia } from '../studant/status';
 import { PerformanceSheet } from '@/app/lib/definitions';
 import { formatText } from '@/app/lib/utils';
+import { CreateGrade } from '@/app/lib/definitions';
+import { modifyGrade } from '@/app/lib/api';
+interface MyComponentProps {
+  dataGrade: PerformanceSheet;
+  disciplinaId: string; // Adicione a propriedade disciplinaId
+}
 
-const MyComponent: React.FC<{ dataGrade: PerformanceSheet }> = ({ dataGrade }) => {
-  const [formData, setFormData] = useState<{ [key: string]: number | string }>({});
+const MyComponent: React.FC<MyComponentProps> = ({ dataGrade, disciplinaId }) => {
+ 
+  const [formData, setFormData] = useState<{[key: string]: { matricula: string, header: string, nota: number } }>({});
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+    const [matricula, header] = name.split(':');
+
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: {
+        matricula,
+        header,
+        nota: Number(value),
+      },
+      
     });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    // try {
-    //   const response = await fetch('/api/submit-grades', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
-    //   const result = await response.json();
-    //   console.log('Result:', result);
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
+    const data:CreateGrade = {disciplinaId:disciplinaId,anoLetivo:'2024',avaliacao:formData}
+    try{
+      const test = await modifyGrade(data)
+    }catch(e){
+      console.log(e)
+    }
   };
 
   const headers = [
@@ -41,9 +47,9 @@ const MyComponent: React.FC<{ dataGrade: PerformanceSheet }> = ({ dataGrade }) =
   return (
     <form onSubmit={handleSubmit}>
       <div className="overflow-x-auto">
-        <table className=" min-w-full text-gray-900 bg-blue-300 rounded-t-md">
+        <table className="min-w-full text-gray-900 bg-blue-300 rounded-t-md">
           <thead className="text-center text-sm font-normal">
-            <tr >
+            <tr>
               {headers.map((header, index) => (
                 index === 0 ? (
                   <th key={index} scope="col" className="font-medium p-1 sticky left-0 z-10 bg-blue-300">{header}</th>
@@ -55,23 +61,23 @@ const MyComponent: React.FC<{ dataGrade: PerformanceSheet }> = ({ dataGrade }) =
             {dataGrade.matriculas.map((matricula, index) => (
               <tr key={index} className="w-full border-b py-3 text-sm last-of-type:border-none">
                 <td className="whitespace-nowrap p-1 border sticky left-0 z-10 bg-gray-50">
-                {formatText(matricula.aluno.nome ? matricula.aluno.nome : '')}
+                  {formatText(matricula.aluno.nome ? matricula.aluno.nome : '')}
                 </td>
                 {matricula.avaliacao.map((avaliacao, indexDisciplina) => (
                   <td key={`${index}-${indexDisciplina}`} className="whitespace-nowrap border">
                     <CheckPassingGrade
-                      nota={Number(formData[`nota-${index}-${indexDisciplina}`]) || avaliacao.nota}
+                      nota={Number(formData[`${matricula.id}:${headers[indexDisciplina + 1]}`]?.nota) || avaliacao.nota}
                       handleChange={handleChange}
-                      name={`nota-${index}-${indexDisciplina}`}
+                      name={`${matricula.id}:${headers[indexDisciplina + 1]}`}
                     />
                   </td>
                 ))}
                 <td className="whitespace-nowrap border">
-                  {checkPassingGradeMedia(matricula.media ? matricula.media :0)}
+                  {checkPassingGradeMedia(matricula.media ? matricula.media : 0)}
                 </td>
                 <td className="whitespace-nowrap border">
-                  {StudantStatus(matricula.status ? matricula.status :'')}
-              </td>
+                  {StudantStatus(matricula.status ? matricula.status : '')}
+                </td>
               </tr>
             ))}
           </tbody>

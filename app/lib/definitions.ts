@@ -216,6 +216,7 @@ export type TeacherSubjects = {
 export type PerformanceSheet = {
   matriculas: [
     {
+      id:string,
       aluno: {
         id: string,
         nome: string
@@ -253,6 +254,18 @@ export type StudantPerformanceSheet = {
       status:string
     }
   ]
+};
+
+export type CreateGrade = {
+  disciplinaId: string;
+  anoLetivo: string;
+  avaliacao: {
+      [key: string]: {
+          matricula: string;
+          header: string;
+          nota: number;
+      };
+  };
 };
 
 

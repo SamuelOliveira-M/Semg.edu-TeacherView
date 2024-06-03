@@ -12,7 +12,8 @@ import {
   Erro,
   TeacherSubjects,
   PerformanceSheet,
-  StudantPerformanceSheet
+  StudantPerformanceSheet,
+  CreateGrade
 } from './definitions';
 
 export async function login(email:string,senha:string) {
@@ -207,7 +208,6 @@ export async function classTeacherSubject(turmaId:string,professorId:string){
     });
   
     const data:TeacherSubjects[] = await res.json();
-    console.log(data)
     return data;
     
   
@@ -256,6 +256,25 @@ export async function getCalendar(id:string) {
     });
   
     const data:ICalendar[]= await res.json();
+    return data;
+  
+  }catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch invoices.');
+  }
+}
+
+export async function modifyGrade(dataGrade:CreateGrade) {
+  try{
+    const res = await fetch(`${process.env.API_URL}/add/notas`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(dataGrade),
+    });
+  
+    const data= await res.json();
     return data;
   
   }catch (error) {

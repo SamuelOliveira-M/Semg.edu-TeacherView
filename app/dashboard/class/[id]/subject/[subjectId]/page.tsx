@@ -38,7 +38,7 @@ export default async function Page(
         Ficha de Redimento
       </h1>
       <Filter subjects = {subjects}/>
-      <IncomeSheet dataGrade = {dataGrade}/>
+      <IncomeSheet dataGrade = {dataGrade} disciplinaId={subjectId}/>
               
     </div>
   );
