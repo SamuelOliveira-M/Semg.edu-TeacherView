@@ -1,11 +1,12 @@
 'use client'
 
 import React, { useState } from 'react';
-import { CheckPassingGrade, StudantStatus, checkPassingGradeMedia } from '../studant/status';
+import { CheckPassingGradeForm, StudantStatus, checkPassingGradeMedia } from '../studant/status';
 import { PerformanceSheet } from '@/app/lib/definitions';
 import { formatText } from '@/app/lib/utils';
 import { CreateGrade } from '@/app/lib/definitions';
-import { modifyGrade } from '@/app/lib/api';
+import { handleSubmitServer } from '@/app/lib/actions';
+
 interface MyComponentProps {
   dataGrade: PerformanceSheet;
   disciplinaId: string; // Adicione a propriedade disciplinaId
@@ -29,12 +30,14 @@ const MyComponent: React.FC<MyComponentProps> = ({ dataGrade, disciplinaId }) =>
       
     });
   };
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  
     const data:CreateGrade = {disciplinaId:disciplinaId,anoLetivo:'2024',avaliacao:formData}
     try{
-      const test = await modifyGrade(data)
+      await handleSubmitServer(data)
+      alert('Suas Notas Foram Salvas')
     }catch(e){
       console.log(e)
     }
@@ -65,7 +68,7 @@ const MyComponent: React.FC<MyComponentProps> = ({ dataGrade, disciplinaId }) =>
                 </td>
                 {matricula.avaliacao.map((avaliacao, indexDisciplina) => (
                   <td key={`${index}-${indexDisciplina}`} className="whitespace-nowrap border">
-                    <CheckPassingGrade
+                    <CheckPassingGradeForm
                       nota={Number(formData[`${matricula.id}:${headers[indexDisciplina + 1]}`]?.nota) || avaliacao.nota}
                       handleChange={handleChange}
                       name={`${matricula.id}:${headers[indexDisciplina + 1]}`}

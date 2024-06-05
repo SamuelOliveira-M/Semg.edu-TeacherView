@@ -137,6 +137,7 @@ export async function studantProfile(id:string){
 }
 
 export async function studantProfileNotes(id:string){
+  noStore();
   try{
     const res = await fetch(`${process.env.API_URL}/avaliacaos/${id}`, {
       method: 'GET',
