@@ -12,7 +12,7 @@ export function StudantStatus( Resultado:string ) {
     <span
       className={clsx(
         {
-          'border-l-2  border-green-600 bg bg-green-200 p-1 rounded-r-md': Resultado === "Aprovadp",
+          'border-l-2  border-green-600 bg bg-green-200 p-1 rounded-r-sm': Resultado === "Aprovado",
           'border-l-2  border-read-600 bg bg-read-200 p-1 rounded-r-sm': Resultado === "Reprovado",
           'border-l-2  border-gray-600 bg bg-gray-200 p-1 rounded-r-sm': Resultado==="Cursando",
         },
@@ -37,7 +37,7 @@ export function StudantStatus( Resultado:string ) {
   );
 }
 
-export const CheckPassingGrade: React.FC<CheckPassingGradeProps> = ({ nota, handleChange, name }) => {
+export const CheckPassingGradeForm: React.FC<CheckPassingGradeProps> = ({ nota, handleChange, name }) => {
   const checkGrade = (): "Reprovado" | "Aprovado" | "Vazio" => {
     if (nota === 0) {
       return 'Vazio';
@@ -75,6 +75,50 @@ export const CheckPassingGrade: React.FC<CheckPassingGradeProps> = ({ nota, hand
 };
 
 export function checkPassingGradeMedia(nota: number ) {
+
+	const checkGrade: () => "Reprovado" | "Aprovado" | "Vazio" = () => {
+    
+    if(nota===0){
+      return 'Vazio'
+    }
+		if(nota>=6){
+			return 'Aprovado'
+		}
+		return 'Reprovado'
+	}
+
+	const status: "Reprovado" | "Aprovado" | "Vazio"= checkGrade()
+
+  return (
+    <span
+      className={clsx(
+        'inline-flex items-center rounded-full px-2 py-1 text-xs',
+        {
+          '': status === 'Aprovado',
+          'text-red-500': status === 'Reprovado',
+        },
+      )}
+    >
+      {status === 'Reprovado' ? (
+        <>
+          {nota.toFixed(1)}
+        </>
+      ) : null}
+      {status === 'Aprovado' ? (
+        <>
+          {nota.toFixed(1)}
+        </>
+      ) : null}
+      {status === 'Vazio' ? (
+        <>
+          
+        </>
+      ) : null}
+    </span>
+  );
+}
+// 
+export function CheckPassingGrade(nota: number ) {
 
 	const checkGrade: () => "Reprovado" | "Aprovado" | "Vazio" = () => {
     

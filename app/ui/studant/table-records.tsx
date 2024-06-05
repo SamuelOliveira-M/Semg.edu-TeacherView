@@ -1,13 +1,12 @@
 import { CheckPassingGrade,StudantStatus } from "./status";
 import { formatText } from "@/app/lib/utils";
-
+import { StudantPerformanceSheet } from "@/app/lib/definitions";
 import React from "react";
-import { studantProfileNotes } from "@/app/lib/api";
 
-export default async function LinhaGrade({ id,  }: {id:string}) {
-  
-  const dataGrade =  await studantProfileNotes(id)
-  
+
+export default async function LinhaGrade({ studantGrade }: {studantGrade:StudantPerformanceSheet}) {
+
+
   const headers = [
     'Matéria', 'MAR', 'ABR', 'MAI', 'JUN', '1ºRS', 'AGO', 'SET', 'OUT', 'NOV', '2ºRS', 'PF', 'MF', 'Resultado'
   ];
@@ -26,7 +25,7 @@ export default async function LinhaGrade({ id,  }: {id:string}) {
         </thead>
 
         <tbody className="bg-white text-center">
-          {dataGrade.redimento.map((disciplina, index) => (
+          {studantGrade.redimento.map((disciplina, index) => (
             <tr key={index} className="w-full border-b py-3 text-sm last-of-type:border-none">
               <td className="whitespace-nowrap p-1 border sticky left-0 z-10 bg-gray-50">
                 {formatText(disciplina.nome ? disciplina.nome : '')}

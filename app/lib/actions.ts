@@ -6,6 +6,8 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import { login } from './api';
+import { CreateGrade } from './definitions';
+import { modifyGrade } from './api';
 
 const secretKey = "secret";
 const key = new TextEncoder().encode(secretKey);
@@ -97,5 +99,14 @@ export async function authenticate(
     }
     throw error;
   
+  }
+}
+
+export async function handleSubmitServer(dataGrade:CreateGrade) {
+  try {
+    const grade = await modifyGrade(dataGrade);
+    return grade; // Retorna o resultado da modificação da nota
+  } catch (error) {
+    throw new Error('Erro ao modificar a nota: ' + error); // Lança um erro se ocorrer algum problema
   }
 }
