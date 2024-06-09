@@ -65,9 +65,8 @@ export const CheckPassingGradeForm: React.FC<CheckPassingGradeProps> = ({ nota, 
         
         {
           'border-none': true,
-          'text-green-500': status === 'Aprovado',
+          'text-gray-500': status === 'Aprovado',
           'text-red-500': status === 'Reprovado',
-          'text-gray-500': status === 'Vazio',
         }
       )}
     />

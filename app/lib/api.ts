@@ -87,6 +87,8 @@ export async function fetchRegistrationById(id:string){
 }
 
 export async function studentPerformanceSheet(turmaId:string, disciplinaId:string, professorId:string){
+  noStore();
+  
   try{
     const res = await fetch(`${process.env.API_URL}/redimentoss/${turmaId}/${disciplinaId}`, {
       method: 'GET',
