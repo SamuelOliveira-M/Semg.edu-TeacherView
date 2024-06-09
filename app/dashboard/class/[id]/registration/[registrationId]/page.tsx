@@ -10,14 +10,10 @@ export default async function Page({ params }: { params: { registrationId: strin
 
   return (
     <main>
-
       <ListDescription id={id}></ListDescription>
       
       <h2 className="mb-6 text-xl md:text-1xl"><strong>Redimento</strong></h2>
-      <LinhaGrade studantGrade={dataGrade}></LinhaGrade>
-      
-      <td className="whitespace-nowrap py-3 pl-6 pr-3">    
-      </td>
+      <LinhaGrade studantGrade={dataGrade}></LinhaGrade>      
     </main>
   )  
 }
