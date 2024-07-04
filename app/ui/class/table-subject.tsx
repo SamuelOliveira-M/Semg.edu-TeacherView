@@ -6,19 +6,14 @@ import { Redimento } from './buttons';
 import { classTeacherSubject } from '@/app/lib/api';
 import { redirect } from "next/navigation";
 import { getSession } from '@/app/lib/actions';
+import { TeacherSubjects } from '@/app/lib/definitions';
 
 export default async function TableSubject({
-  id,
+  subjects,id
 }: {
-  id: string; 
+  subjects: TeacherSubjects[],
+  id:string 
 }) { 
-  
-  const session = await getSession();
-  if(!session){
-    redirect("/login");
-  }
-
-  const subjects = await classTeacherSubject(id,session.user.id);
   
   return (
     <div className="flex w-full flex-col md:col-span-4">

@@ -1,10 +1,8 @@
-import { getCalendar } from '../lib/api';
 import { Card } from './card';
 import { lusitana } from './fonts';
+import { ICalendar } from '../lib/definitions';
 
-export async function Calendar({ id }: { id: string }){
-
-	const dados = await getCalendar(id)
+export async function Calendar({ dataCalendar }: { dataCalendar: ICalendar[] }){
 
 	return(
 		<div>
@@ -32,17 +30,17 @@ export async function Calendar({ id }: { id: string }){
 					</tr>
 				</thead>
 				<tbody className="bg-gray-100">
-    				{dados.map((student, i) => (
+    				{dataCalendar.map((horarios, i) => (
 						<tr key={i} className="">
-							{student.calendario.aulas.map((aula, j) => (
-                				<td key={j}>
-                    				<Card 
+							{horarios.calendario.aulas.map((aula, j) => (
+								<td key={j}>
+									<Card 
 										materia={aula.lotacao.disciplina.nome} 
 										professor={aula.lotacao.professor.nome} 
 										horario={aula.horario.horarioFim}
 									/>
-               					 </td>
-           					 ))}
+								</td>
+							))}
 						</tr>
     				))}
 				</tbody>

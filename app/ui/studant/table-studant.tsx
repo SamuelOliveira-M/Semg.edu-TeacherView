@@ -5,14 +5,16 @@ import clsx from 'clsx';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { formatDateToBirth, formatText } from '@/app/lib/utils';
+import { RegistrationTable } from '@/app/lib/definitions';
 
 export default async function StudantTable({
-  id,
+  matriculas,
+  id
 }: {
-  id: string; 
+  matriculas: RegistrationTable[],
+  id:string 
 }) {
-  const matriculas = await fetchRegistrationById(id);
-
+  
   return (
     <div className="flex w-full flex-col md:col-span-4">
       <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
