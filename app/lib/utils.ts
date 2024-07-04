@@ -55,8 +55,11 @@ export const formatlocality = (
 };
 
 export const formatCpf = (
-  cpf: string,
+  cpf: string|undefined,
 ) => {
+  if(!cpf){
+    return 'Cpf não informado'
+  }
   cpf = cpf.replace(/\D/g, '');
 
   cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
