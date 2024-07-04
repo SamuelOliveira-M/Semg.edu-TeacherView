@@ -10,14 +10,19 @@ import {
 import { Suspense } from "react";
 import ProfilePicture from "@/app/ui/profile-picture";
 import BannerStudant from "./banner-studant";
+import { ErrorMensage } from "../error-mensage";
 
 export default async function ListDescription({ id }: {id:string}){
 
 	const profileDate =  await studantProfile(id)
-
+	if (profileDate instanceof Error) {
+		return( 
+      ErrorMensage(profileDate.message)
+    )	
+	}
+	
 	return(
 		<>
-				
 			<BannerStudant profileDate={profileDate}></BannerStudant>
 
 			<dl className="w-full p-6 mb-10 list-none ">
