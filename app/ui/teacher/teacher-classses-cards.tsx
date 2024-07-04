@@ -4,11 +4,18 @@ import {test} from '@/app/lib/api'
 
 import { Grid } from '@tremor/react';
 import Link from 'next/link';
+import { ErrorMensage } from '../error-mensage';
 
 export default async function SchoolClassCard({id}:{id:string}) {
   
   const teacherClasses = await test(id)
   
+  if (teacherClasses instanceof Error) {
+		return( 
+      ErrorMensage(teacherClasses.message)
+    )	
+	}
+
   return (
     <div className="rounded-lg bg-gray-50 p-4 md:pt-0">
       <Grid numItemsSm={2} numItemsLg={30} className="gap-6">
