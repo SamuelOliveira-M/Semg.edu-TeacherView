@@ -1,14 +1,18 @@
 import InvoiceStatus from '@/app/ui/teacher/status';
 import { formatDateToLocal } from '@/app/lib/utils';
 import {fetchFilteredClass} from '@/app/lib/api'
-
 import { Grid } from '@tremor/react';
 import Link from 'next/link';
+import { ErrorMensage } from '../error-mensage';
 
 export default async function CardClass() {
   
   const classrooms = await fetchFilteredClass()
   
+  if (classrooms instanceof Error) {
+    return ErrorMensage(classrooms.message)
+  }
+
   return (
     <div className="rounded-lg bg-gray-50 p-4 md:pt-0">
       <Grid numItemsSm={2} numItemsLg={30} className="gap-6">
