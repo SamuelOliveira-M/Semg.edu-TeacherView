@@ -49,7 +49,7 @@ export async function POST(email:string,senha:string) {
   }  
   catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -67,7 +67,7 @@ export async function fetchFilteredClass() {
     return (data);
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -82,7 +82,7 @@ export async function fetchRegistrationById(id:string){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -99,7 +99,7 @@ export async function studentPerformanceSheet(turmaId:string, disciplinaId:strin
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -119,7 +119,7 @@ export async function uniqueFetchRegistrationById(id:string){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -134,7 +134,7 @@ export async function studantProfile(id:string){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -150,7 +150,7 @@ export async function studantProfileNotes(id:string){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -166,7 +166,7 @@ export async function reqTeachers(){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -180,8 +180,7 @@ export async function reqTeacher(id:string){
     return data;
   
   }catch (error) {
-    console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 export async function reqSubjectAndTeacher(id:string){
@@ -197,7 +196,7 @@ export async function reqSubjectAndTeacher(id:string){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -216,7 +215,7 @@ export async function classTeacherSubject(turmaId:string,professorId:string){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -233,7 +232,7 @@ export async function test(id:string){
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -248,7 +247,7 @@ export async function getStatistics() {
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -263,7 +262,7 @@ export async function getCalendar(id:string) {
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
 
@@ -282,6 +281,6 @@ export async function modifyGrade(dataGrade:CreateGrade) {
   
   }catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch invoices.');
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
   }
 }
