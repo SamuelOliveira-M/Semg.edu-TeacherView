@@ -8,6 +8,7 @@ import BannerClass from '@/app/ui/class/banner-class';
 import { lusitana } from '@/app/ui/fonts';
 import Filter from '@/app/ui/filter';
 import { classTeacherSubject ,studentPerformanceSheet} from '@/app/lib/api';
+import { ErrorMensage } from '@/app/ui/error-mensage';
 
 export default async function Page(
   { params }: { params: {
@@ -27,9 +28,17 @@ export default async function Page(
   const teacherId = session.user.id
 
   const subjects = await classTeacherSubject(classId,session.user.id);
-
+  if (subjects instanceof Error) {
+		return( 
+      ErrorMensage(subjects.message)
+    )	
+	}
   const dataGrade =  await studentPerformanceSheet(classId, subjectId, teacherId)
-  
+  if (dataGrade instanceof Error) {
+		return( 
+      ErrorMensage(dataGrade.message)
+    )	
+	}
   return (
     <div>	
       <BannerClass/>
@@ -38,8 +47,7 @@ export default async function Page(
         Ficha de Redimento
       </h1>
       <Filter subjects = {subjects}/>
-      <IncomeSheet dataGrade = {dataGrade} disciplinaId={subjectId}/>
-              
+      <IncomeSheet dataGrade = {dataGrade} disciplinaId={subjectId}/>       
     </div>
   );
 } 
