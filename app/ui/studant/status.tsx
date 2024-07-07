@@ -54,9 +54,9 @@ export const CheckPassingGradeForm: React.FC<CheckPassingGradeProps> = ({ nota, 
     <input
       type="number"
       name={name}
-      value={nota === 0 ? '' : nota.toString()}
+      defaultValue={nota === 0 ? '' : nota.toString()}
       onChange={handleChange}
-      min={0.1}
+      min={0.0}
       max={10}
       step={0.1}
       maxLength={2}
