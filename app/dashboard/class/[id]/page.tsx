@@ -61,7 +61,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         </Suspense>
         
         <Suspense fallback={<RevenueChartSkeleton />}>
-          <TableStudant matriculas={matriculas} id={classid}/>
+          <TableStudant matriculas={matriculas} id={classid} subjectId={teacherSubjects[0].disciplina.id}/>
         </Suspense>
       </div>
     </div>

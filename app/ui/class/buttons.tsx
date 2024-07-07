@@ -58,7 +58,7 @@ export function UpdateMatricula(
 //   );
 // }
 
-export function Redimento(
+export function PostStudentGrades(
   { 
 		disciplinaId,
 		turmaId
