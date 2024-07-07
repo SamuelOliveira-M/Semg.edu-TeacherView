@@ -5,16 +5,13 @@ import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { formatDateToBirth, formatText } from '@/app/lib/utils';
 import { RegistrationTable } from '@/app/lib/definitions';
-import { PostStudentGrades } from '../class/buttons';
 
 export default async function StudantTable({
   matriculas,
   id,
-  subjectId
 }: {
   matriculas: RegistrationTable[],
   id:string,
-  subjectId:string
 }) {
   
   return (
@@ -33,7 +30,7 @@ export default async function StudantTable({
                 <div
                   key={studant.id}
                   className={clsx(
-                    'flex flex-row items-center justify-between p-4 hover:shadow-md',
+                    'flex flex-row items-center justify-between p-2 hover:shadow-md',
                     {
                       'border-t': i !== 0,
                     },
@@ -70,7 +67,6 @@ export default async function StudantTable({
           <ArrowPathIcon className="h-5 w-5 text-gray-500" />
           <h3 className="ml-2 text-sm text-gray-500 ">Updated just now</h3>
         </div>
-        <PostStudentGrades disciplinaId={subjectId} turmaId={id} ></PostStudentGrades>
       </div>
     </div>
   );
