@@ -67,10 +67,10 @@ export function PostStudentGrades(
     return (
     <Link
       href={`/dashboard/class/${turmaId}/subject/${disciplinaId}`}
-      className="rounded-md border p-2 hover:bg-gray-50"
+      className="flex rounded-md border p-2 hover:bg-gray-100 hover:border-blue-600"
       title='Ficha de Redimento'
     >
-      <ClipboardDocumentListIcon className="w-5" />
+      <ClipboardDocumentListIcon className="w-6" />
     </Link>
   );
 }

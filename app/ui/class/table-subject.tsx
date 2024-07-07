@@ -2,7 +2,7 @@ import { lusitana } from '@/app/ui/fonts';
 import clsx from 'clsx';
 import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { Redimento } from './buttons';
+import { PostStudentGrades } from './buttons';
 import { classTeacherSubject } from '@/app/lib/api';
 import { redirect } from "next/navigation";
 import { getSession } from '@/app/lib/actions';
@@ -31,7 +31,7 @@ export default async function TableSubject({
                   {subject.disciplina.nome}
                 </p>
                 
-                <Redimento 
+                <PostStudentGrades 
                   turmaId={id}
                   disciplinaId={subject.disciplina.id}
                 />
