@@ -1,7 +1,5 @@
 import IncomeSheet from '@/app/ui/teacher/income-sheet';
 
-import { fetchRegistrationById } from '@/app/lib/api';
-import { notFound } from 'next/navigation';
 import { getSession } from "@/app/lib/actions";
 import { redirect } from "next/navigation";
 import BannerClass from '@/app/ui/class/banner-class';
@@ -41,12 +39,12 @@ export default async function Page(
 	}
   return (
     <div>	
-      <BannerClass/>
+      <BannerClass classId={classId}/>
 
       <h1 className={`${lusitana.className} mt-8 mb-4 text-xl md:text-2xl`}>
         Ficha de Redimento
       </h1>
-      <Filter subjects = {subjects}/>
+      <Filter subjects = {subjects} classId={classId}/>
       <IncomeSheet dataGrade = {dataGrade} disciplinaId={subjectId}/>       
     </div>
   );

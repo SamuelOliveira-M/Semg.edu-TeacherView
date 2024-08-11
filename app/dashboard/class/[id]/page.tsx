@@ -1,7 +1,7 @@
 import TableStudant from '@/app/ui/studant/table-studant';
 import TableSubject from'@/app/ui/class/table-subject'
 import { Suspense } from 'react';
-import { classTeacherSubject, fetchRegistrationById } from '@/app/lib/api';
+import { classTeacherSubject, fetchRegistrationById, getClassroomById } from '@/app/lib/api';
 import { notFound, redirect } from 'next/navigation';
 import BannerClass from '@/app/ui/class/banner-class';
 import { RevenueChartSkeleton } from '@/app/ui/skeletons';
@@ -14,33 +14,27 @@ import { getSession } from '@/app/lib/actions';
 
 export default async function Page({ params }: { params: { id: string } }) {
   
-  const classid = params.id; 
-
+ 
   const session = await getSession();
   if(!session){
     redirect("/login");
   }
 
-  const schoolClass = await fetchRegistrationById(classid)
-  if (!schoolClass) {
-    notFound();
-  }
-
-  const calendar = await getCalendar(classid)
+  const calendar = await getCalendar(params.id)
   if (calendar instanceof Error) {
 		return( 
       ErrorMensage(calendar.message)
     )	
 	}
 
-  const matriculas = await fetchRegistrationById(classid);
+  const matriculas = await fetchRegistrationById(params.id);
   if (matriculas instanceof Error) {
 		return( 
       ErrorMensage(matriculas.message)
     )	
 	}
 
-  const teacherSubjects = await classTeacherSubject(classid,session.user.id);
+  const teacherSubjects = await classTeacherSubject(params.id,session.user.id);
   if (teacherSubjects instanceof Error) {
 		return( 
       ErrorMensage(teacherSubjects.message)
@@ -49,7 +43,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   return (
     <div>	
-      <BannerClass/>
+      <BannerClass classId={params.id}/>
       
       <div className='pt-8'>
         <Calendar dataCalendar={calendar}/>
@@ -57,13 +51,13 @@ export default async function Page({ params }: { params: { id: string } }) {
       
       <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
         <Suspense fallback={<LatestInvoicesSkeleton />}>
-          <TableSubject subjects={teacherSubjects} id={classid} />
+          <TableSubject subjects={teacherSubjects} id={params.id} />
         </Suspense>
-        
+
         <Suspense fallback={<RevenueChartSkeleton />}>
-          <TableStudant matriculas={matriculas} id={classid}/>
+          <TableStudant matriculas={matriculas} id={params.id}/>
         </Suspense>
-      </div>
+      </div> 
     </div>
   );
 }

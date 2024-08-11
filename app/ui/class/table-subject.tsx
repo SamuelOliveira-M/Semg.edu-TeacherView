@@ -21,10 +21,10 @@ export default async function TableSubject({
         Minhas Disciplinas
       </h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
-        <div className='bg-white py-1'>
+        <div className='bg-white  py-1'>
           {subjects.map((subject) => {
             return (
-              <div key={subject.disciplina.id} className='flex justify-between items-center p-2 '>  
+              <div key={subject.disciplina.id} className='flex flex-row items-center justify-between p-4 hover:shadow-md'>  
                 <p
                   className={`truncate text-sm md:text-base`}
                 >

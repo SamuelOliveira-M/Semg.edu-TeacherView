@@ -8,9 +8,10 @@ import { TeacherSubjects } from '../lib/definitions';
 
 interface FilterProps {
   subjects: TeacherSubjects[];
+  classId:string
 }
 
-const Filter: React.FC<FilterProps> = ({ subjects }) => {
+const Filter: React.FC<FilterProps> = ({ subjects ,classId}) => {
   console.log(subjects);
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -29,7 +30,7 @@ const Filter: React.FC<FilterProps> = ({ subjects }) => {
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedSubjectId = event.target.value;
 
-    push(`/dashboard/class/1d40e9da-5e84-4c29-8cfa-21563f284b1b/subject/${selectedSubjectId}`);
+    push(`/dashboard/class/${classId}/subject/${selectedSubjectId}`);
   };
 
   return (

@@ -1,21 +1,33 @@
-import {
-  BanknotesIcon,
-  ClockIcon,
-  UserGroupIcon,
-  InboxIcon,
-} from '@heroicons/react/24/outline';
-import { lusitana } from '@/app/ui/fonts';
 
+import { getClassroomById } from '@/app/lib/api';
+import { SchollClass } from '@/app/lib/definitions';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
-export default async function BannerClass() {
 
+
+export default async function BannerClass({classId}:{classId:string}) {
+
+  const classroom = await getClassroomById(classId)
+  if (classroom instanceof Error) {
+    return(
+      <p>Erro ao renderizar o componente, por favor atualize a pagina !</p>
+    )
+  }
+
+  if(!classroom){
+    return(
+      <p>Erro ao renderizar o componente, por favor atualize a pagina !</p>
+    )
+  }
+
+  
   return (
 
     <div className="class-card bg-blue-700 p-8 rounded-lg shadow-lg max-w mx-auto flex">
       <div className=" flex items-center flex-1 mt-2 ">
         <div>
-        <h1 className="text-2xl mb-4 text-white font-semibold"><strong>8º ano B - Manhã - 2024</strong></h1>
+        <h1 className="text-2xl mb-4 text-white font-semibold"><strong>{classroom.nome}</strong></h1>
         <h3 className="text-lg mb-2 text-white">Joaquim Antônio de Araújo</h3>      
         </div>
       </div>

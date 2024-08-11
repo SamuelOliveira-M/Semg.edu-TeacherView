@@ -13,7 +13,8 @@ import {
   TeacherSubjects,
   PerformanceSheet,
   StudantPerformanceSheet,
-  CreateGrade
+  CreateGrade,
+  SchollClass
 } from './definitions';
 
 export async function login(email:string,senha:string) {
@@ -71,7 +72,25 @@ export async function fetchFilteredClass() {
   }
 }
 
+export async function getClassroomById(classId:string){
+  noStore();
+  try{
+    const res = await fetch(`${process.env.API_URL}/classroom/${classId}`, {
+      method: 'GET',
+    });
+  
+    const data:SchollClass= await res.json();
+    return data;
+  
+  }catch (error) {
+    console.error('Database Error:', error);
+    return new Error('Erro Interno do Servidor. Por favor volte mais tarde !');
+  }
+}
+
+
 export async function fetchRegistrationById(id:string){
+  noStore();
   try{
     const res = await fetch(`${process.env.API_URL}/studantee/${id}`, {
       method: 'GET',
